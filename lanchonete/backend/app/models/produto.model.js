@@ -14,13 +14,35 @@ ProdutoModel.create = (produto, result) => {
 
 //Selecionar um produto através de um ID
 ProdutoModel.findById = (produtoId, result) => {
+    sql.query("SELECT * FROM produtos WHERE idprodutos = " + produtoId, (err, res) => {
+        if (err) {
+            console.log("erro: ", err);
+            result(null, err);
+            return;
+        }
 
+        if (res.length) {
+            console.log("Produto encontrado: ", res[0]);
+            result(null, res[0]);
+            return;
+        } else
+            result({ kind: "not_found" }, null)
+
+    })
 
 };
 
 //Selecionar todos os produtos
 ProdutoModel.getAll = (result) => {
-
+    sql.query("SELECT * FROM produtos", (err, res) => {
+        if (err) {
+            console.log("erro: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("produtos: ", res);
+        result(null, res);
+    })
 }
 
 //Atualizar produto através de um ID
