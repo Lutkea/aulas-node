@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-//parser para eequisições com content-type: application/json
+//parser para requisições com content-type: application/json
 app.use(bodyParser.json());
 
 //parser para requisições content-type: application/x-www-form-urlencoded

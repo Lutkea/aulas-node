@@ -8,7 +8,16 @@ const ProdutoModel = function(produto) {
 
 //Cria um novo produto no banco
 ProdutoModel.create = (produto, result) => {
+    sql.query("INSERT INTO produtos SET ? ", produto, (err, res) => {
+        if (err) {
+            console.log("Erro:", err);
+            result(err, null);
+            return;
+        }
+        console.log("Produto criado: ", { idprodutos: res.insertId, ...produto });
+        result(null, { idprodutos: res.insertId, ...produto });
 
+    });
     //implementar criação de um novo produto no banco
 };
 
