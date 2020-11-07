@@ -6,6 +6,7 @@ const ProdutoModel = function(produto) {
     this.valor = produto.valor;
 }
 
+
 //Cria um novo produto no banco
 ProdutoModel.create = (produto, result) => {
     sql.query("INSERT INTO produtos SET ? ", produto, (err, res) => {
@@ -56,19 +57,44 @@ ProdutoModel.getAll = (result) => {
 
 //Atualizar produto através de um ID
 ProdutoModel.updateById = (produtoId, produto, result) => {
-
-
+    sql.query("UPDATE produtos SET nome = ?, valor = ? WHERE idprodutos = ? ", [produto.nome, produto.valor, produtoId], (err, res) => {
+        if (err) {
+            console.log("erro: ", err);
+            result(err, null);
+        } else if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+        } else {
+            console.log("Produto atualizado: ", { idprodutos: produtoId, ...produto });
+            result(null, { idprodutos: produtoId, ...produto });
+        }
+    })
 }
+
 
 //Remover produto através de um ID
 ProdutoModel.remove = (produtoId, result) => {
-
-
+    sql.query("DELETE FROM produtos WHERE idprodutos = ?", produtoId, (err, res) => {
+        if (err) {
+            console.log("erro:", err);
+            result(err, null);
+        } else if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+        } else {
+            result(null, res);
+        }
+    })
 }
 
 //Remover todos os produtos
 ProdutoModel.removeAll = (result) => {
-
+    sql.query("DELETE FROM produtos", (err, res) => {
+        if (err) {
+            console.log("erro:", err);
+            result(err);
+        } else {
+            result(null);
+        }
+    })
 }
 
 module.exports = ProdutoModel;
