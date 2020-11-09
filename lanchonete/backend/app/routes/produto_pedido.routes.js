@@ -9,6 +9,7 @@ module.exports = app => {
 
     app.post("/produtos_pedidos", produtoPedidoController.create);
 
+    /*
     app.get("/produtos_pedidos", produtoPedidoController.findAll);
 
     //Select a partir do identificador da tabela, do identificador do pedido e do ID do produto
@@ -34,5 +35,5 @@ module.exports = app => {
     app.delete("/produtos_pedidos/produto/:produtoId", produtoPedidoController.deleteByProduto);
 
     app.delete("/produtos_pedidos", produtoPedidoController.deleteAll);
-
+*/
 }
