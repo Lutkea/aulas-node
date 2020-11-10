@@ -17,3 +17,28 @@ exports.findAll = (req, res) => {
         res.send(data);
     });
 }
+
+exports.findOne = (req, res) => {
+    produtoPedidoModel.findById(req.params.produtoPedidoId, (err, data) => {
+        if (err) {
+            if (err.kind == "not_found") {
+                res.status(404).send({
+                    message: "Registro não encontrado com ID " + req.params.produtoPedidoId
+                });
+            }
+        }
+        res.send(data);
+    })
+}
+
+exports.findByPedido = (req, res) => {
+    produtoPedidoModel.getByPedido(req.params.pedidoId, (err, data) => {
+        res.send(data);
+    })
+}
+
+exports.findByProduto = (req, res) => {
+    produtoPedidoModel.getByProduto(req.params.produtoId, (err, data) => {
+        res.send(data);
+    })
+}
