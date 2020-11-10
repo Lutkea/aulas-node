@@ -11,3 +11,9 @@ exports.create = (req, res) => {
         res.send(data);
     });
 }
+
+exports.findAll = (req, res) => {
+    produtoPedidoModel.getAll((err, data) => {
+        res.send(data);
+    });
+}

@@ -12,6 +12,14 @@ ProdutoPedido.create = (produtoPedido, result) => {
     })
 }
 
+ProdutoPedido.getAll = (result) => {
+    sql.query(`SELECT * FROM produtos_pedidos prods_peds
+    INNER JOIN pedidos peds ON (peds.idpedidos = prods_peds.pedidos_idpedidos)
+    INNER JOIN produtos prods ON (prods.idprodutos = prods_peds.produtos_idprodutos)
+    `, (err, res) => {
+        result(null, res);
+    })
+}
 
 
 
