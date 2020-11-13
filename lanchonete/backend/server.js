@@ -17,6 +17,8 @@ require("./app/routes/produto.routes.js")(app);
 //Comando necessário para incluir as rotas de produto_pedido
 require("./app/routes/produto_pedido.routes.js")(app);
 
+require("./app/routes/usuario.routes.js")(app);
+
 app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000");
 });
